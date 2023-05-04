@@ -5,6 +5,7 @@ import images from '~/assets/images'
 import Tippy from '@tippyjs/react'
 import HeadlessTippy from '@tippyjs/react/headless'
 import 'tippy.js/dist/tippy.css'
+import Image from '~/components/Image'
 
 import Button from '~/components/Button'
 import { Wrapper as PopperWrapper } from '~/components/Popper'
@@ -22,11 +23,11 @@ import {
     faGear,
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons'
-import { faMessage } from '@fortawesome/free-regular-svg-icons'
-import { faBitcoin, faCloudversify } from '@fortawesome/free-brands-svg-icons'
+import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 
 import AccountItem from '~/components/AccountItem'
 import Menu from '~/components/Popper/Menu'
+import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons'
 
 const cx = classNames.bind(styles)
 
@@ -160,20 +161,30 @@ const Header = () => {
                         <>
                             <Tippy
                                 interactive
-                                delay={[0, 200]}
+                                delay={[0, 50]}
                                 content='Upload video'
                             >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudversify} />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
                             <Tippy
                                 interactive
-                                delay={[0, 200]}
+                                delay={[0, 50]}
                                 content='Message'
                             >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faMessage} />
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                interactive
+                                delay={[0, 50]}
+                                content='Message'
+                            >
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
@@ -194,7 +205,7 @@ const Header = () => {
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src='https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/9bb19790d02381f067077505d724f2bb~c5_300x300.webp?x-expires=1683266400&x-signature=%2BzbQIwvVHPHlfqrCw7O6wj7NRqo%3D'
                                 alt='A'
