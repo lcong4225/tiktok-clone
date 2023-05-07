@@ -11,7 +11,9 @@ import {
     faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 
+import * as searchService from '~/apiServices/searchServices'
 import AccountItem from '~/components/AccountItem'
+import { useDebounce } from '~/hooks'
 
 const cx = classNames.bind(styles)
 
@@ -21,30 +23,41 @@ const Search = () => {
     const [showResult, setShowResult] = useState(true)
     const [loading, setLoading] = useState(false)
 
+    const debounced = useDebounce(searchValue, 700)
+
     const inputRef = useRef()
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([])
             return
         }
 
-        setLoading(true)
+        const fetchApi = async () => {
+            setLoading(true)
 
-        fetch(
-            `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-                searchValue
-            )}&type=less`
-        )
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data)
-                setLoading(false)
-            })
-            .catch(() => {
-                setLoading(false)
-            })
-    }, [searchValue])
+            const result = await searchService.search(debounced)
+            setSearchResult(result)
+
+            setLoading(false)
+        }
+
+        fetchApi()
+
+        // fetch(
+        //     `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
+        //         debounced
+        //     )}&type=less`
+        // )
+        //     .then((res) => res.json())
+        //     .then((res) => {
+        //         setSearchResult(res.data)
+        //         setLoading(false)
+        //     })
+        //     .catch(() => {
+        //         setLoading(false)
+        //     })
+    }, [debounced])
 
     const handleClear = () => {
         setSearchValue('')
