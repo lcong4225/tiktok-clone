@@ -17,7 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 
-import routesConfig from '~/config/routes'
+import config from '~/config'
 import Image from '~/components/Image'
 import Button from '~/components/Button'
 import Menu from '~/components/Popper/Menu'
@@ -90,7 +90,7 @@ const Header = () => {
             <div className={cx('inner')}>
                 {/* Logo */}
                 <div className={cx('logo')}>
-                    <Link to={routesConfig.home}>
+                    <Link to={config.routes.home}>
                         <img src={images.logo.default} alt='Tiktok' />
                     </Link>
                 </div>

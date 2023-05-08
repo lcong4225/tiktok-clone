@@ -11,7 +11,7 @@ import {
     faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 
-import * as searchService from '~/apiServices/searchServices'
+import * as searchService from '~/services/searchServices'
 import AccountItem from '~/components/AccountItem'
 import { useDebounce } from '~/hooks'
 
