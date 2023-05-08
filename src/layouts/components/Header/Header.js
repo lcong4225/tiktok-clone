@@ -48,7 +48,7 @@ const MENU_ITEMS = [
 ]
 
 const Header = () => {
-    const currentUser = true
+    const currentUser = false
 
     // Handle logic
     const handleMenuChange = (menuItem) => {

@@ -23,12 +23,12 @@ const Search = () => {
     const [showResult, setShowResult] = useState(true)
     const [loading, setLoading] = useState(false)
 
-    const debounced = useDebounce(searchValue, 700)
+    const debouncedValue = useDebounce(searchValue, 700)
 
     const inputRef = useRef()
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([])
             return
         }
@@ -36,7 +36,7 @@ const Search = () => {
         const fetchApi = async () => {
             setLoading(true)
 
-            const result = await searchService.search(debounced)
+            const result = await searchService.search(debouncedValue)
             setSearchResult(result)
             setLoading(false)
         }
@@ -45,7 +45,7 @@ const Search = () => {
 
         // fetch(
         //     `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-        //         debounced
+        //         debouncedValue
         //     )}&type=less`
         // )
         //     .then((res) => res.json())
@@ -56,7 +56,7 @@ const Search = () => {
         //     .catch(() => {
         //         setLoading(false)
         //     })
-    }, [debounced])
+    }, [debouncedValue])
 
     const handleClear = () => {
         setSearchValue('')
